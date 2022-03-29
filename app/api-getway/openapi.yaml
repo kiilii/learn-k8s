@@ -1,0 +1,98 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Getway API
+    description: The getway service definition.
+    version: 0.0.1
+paths:
+    /goods:
+        get:
+            tags:
+                - Getway
+            operationId: Getway_ListGoods
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListGoodsReply'
+    /goods/{goodsId}:
+        get:
+            tags:
+                - Getway
+            operationId: Getway_GetGoods
+            parameters:
+                - name: goodsId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetGoodsReply'
+    /helloworld/{name}:
+        get:
+            tags:
+                - Getway
+            description: Sends a getway
+            operationId: Getway_SayHello
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HelloReply'
+components:
+    schemas:
+        GetGoodsReply:
+            type: object
+            properties:
+                goodsId:
+                    type: integer
+                    format: int64
+                goodName:
+                    type: string
+                price:
+                    type: number
+                    format: float
+        Goods:
+            type: object
+            properties:
+                goodsId:
+                    type: integer
+                    format: int64
+                goodName:
+                    type: string
+                price:
+                    type: number
+                    format: float
+        HelloReply:
+            type: object
+            properties:
+                message:
+                    type: string
+            description: The response message containing the getway
+        ListGoodsReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Goods'
+tags:
+    - name: Getway

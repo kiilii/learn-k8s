@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package getway.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "api-getway/api/getway/v1;v1";
+
+// The getway service definition.
+service Getway {
+  // Sends a getway
+  rpc SayHello (HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      get: "/helloworld/{name}"
+    };
+  }
+
+  rpc GetGoods (GetGoodsRequest) returns (GetGoodsReply){
+    option (google.api.http) = {
+      get: "/goods/{goods_id}"
+    };
+  };
+
+  rpc ListGoods (ListGoodsRequest) returns (ListGoodsReply){
+    option (google.api.http) = {
+      get: "/goods"
+    };
+  };
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the getway
+message HelloReply {
+  string message = 1;
+}
+
+message Goods {
+  int64 goods_id = 1;
+  string good_name = 2;
+  float price = 3;
+}
+
+message GetGoodsRequest {
+  int64 goods_id = 1;
+}
+message GetGoodsReply {
+  int64 goods_id = 1;
+  string good_name = 2;
+  float price = 3;
+}
+
+message ListGoodsRequest{}
+message ListGoodsReply{
+  repeated Goods list = 1;
+}
