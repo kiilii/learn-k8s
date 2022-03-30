@@ -19,6 +19,6 @@ WORKDIR /app
 
 EXPOSE 8000
 EXPOSE 9000
-COPY ./configs/ /data/conf/
+VOLUME /data/conf
 
-CMD ["./api-getway", "-conf", "/data/conf"]
+CMD ["./server", "-conf", "/data/conf"]

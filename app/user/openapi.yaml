@@ -1,0 +1,219 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: User API
+    version: 0.0.1
+paths:
+    /v1/user:
+        put:
+            tags:
+                - User
+            operationId: User_UpdateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateUserReply'
+        post:
+            tags:
+                - User
+            operationId: User_CreateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateUserReply'
+    /v1/user/{id}:
+        get:
+            tags:
+                - User
+            operationId: User_GetUser
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetUserReply'
+        delete:
+            tags:
+                - User
+            operationId: User_DeleteUser
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteUserReply'
+    /v1/users:
+        get:
+            tags:
+                - User
+            operationId: User_ListUser
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListUserReply'
+components:
+    schemas:
+        CreateUserReply:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                gender:
+                    type: integer
+                    format: int32
+                desc:
+                    type: string
+                phone:
+                    type: string
+                address:
+                    type: string
+        CreateUserRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                gender:
+                    type: integer
+                    format: int32
+                desc:
+                    type: string
+                phone:
+                    type: string
+                address:
+                    type: string
+        DeleteUserReply:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                gender:
+                    type: integer
+                    format: int32
+                desc:
+                    type: string
+                phone:
+                    type: string
+                address:
+                    type: string
+        GetUserReply:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                gender:
+                    type: integer
+                    format: int32
+                desc:
+                    type: string
+                phone:
+                    type: string
+                address:
+                    type: string
+        ListUserReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Person'
+        Person:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                gender:
+                    type: integer
+                    format: int32
+                desc:
+                    type: string
+                phone:
+                    type: string
+                address:
+                    type: string
+        UpdateUserReply:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                gender:
+                    type: integer
+                    format: int32
+                desc:
+                    type: string
+                phone:
+                    type: string
+                address:
+                    type: string
+        UpdateUserRequest:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                gender:
+                    type: integer
+                    format: int32
+                desc:
+                    type: string
+                phone:
+                    type: string
+                address:
+                    type: string
+tags:
+    - name: User
