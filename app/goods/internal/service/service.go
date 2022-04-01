@@ -1,7 +1,7 @@
 package service
 
 import (
-	v1 "goods/api/helloworld/v1"
+	v1 "goods/api/goods/v1"
 	"goods/internal/biz"
 
 	"github.com/google/wire"
@@ -12,7 +12,7 @@ var ProviderSet = wire.NewSet(NewGoodsService)
 
 // GreeterService is a greeter service.
 type GoodsService struct {
-	v1.UnimplementedGreeterServer
+	v1.UnimplementedGoodsServer
 
 	uc *biz.GoodsUsecase
 }

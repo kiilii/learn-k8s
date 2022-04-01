@@ -41,8 +41,20 @@ func NewGoodsUsecase(repo GoodsRepo, logger log.Logger) *GoodsUsecase {
 	return &GoodsUsecase{repo: repo, log: log.NewHelper(logger)}
 }
 
+func (uc *GoodsUsecase) GetGoods(ctx context.Context, id int64) (*Goods, error) {
+	return uc.repo.FindByID(ctx, id)
+}
+
 // CreateGoods creates a Goods, and returns the new Goods.
 func (uc *GoodsUsecase) CreateGoods(ctx context.Context, g *Goods) (*Goods, error) {
 	// uc.log.WithContext(ctx).Infof("CreateGreeter: %v", g.Hello)
 	return uc.repo.Save(ctx, g)
+}
+
+func (uc *GoodsUsecase) ListAll(ctx context.Context) ([]*Goods, error) {
+	items, err := uc.repo.ListAll(ctx)
+	if err != nil {
+		uc.log.WithContext(ctx).Warn()
+	}
+	return items, err
 }

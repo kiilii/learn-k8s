@@ -8,6 +8,7 @@ import "google/protobuf/duration.proto";
 message Bootstrap {
   Server server = 1;
   Data data = 2;
+  Naming naming = 3;
 }
 
 message Server {
@@ -38,4 +39,14 @@ message Data {
   }
   Database database = 1;
   Redis redis = 2;
+}
+
+message Naming {
+  message Etcd {
+    repeated string addr = 1;
+    string username = 2;
+    string password = 3;
+    google.protobuf.Duration timeout = 4;
+  }
+  Etcd etcd = 1;
 }

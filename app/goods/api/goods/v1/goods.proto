@@ -2,21 +2,38 @@ syntax = "proto3";
 
 package api.goods.v1;
 
+import "google/api/annotations.proto";
+
 option go_package = "goods/api/goods/v1;v1";
 
 service Goods {
-	rpc CreateGoods (CreateGoodsRequest) returns (CreateGoodsReply){
+	// rpc CreateGoods (CreateGoodsRequest) returns (CreateGoodsReply){
+	// 	option (google.api.http) = {
+	// 		post: "/v1/goods"
+	// 		body: "*"
+	// 	};
+	// };
+	// rpc UpdateGoods (UpdateGoodsRequest) returns (UpdateGoodsReply){
+	// 	option (google.api.http) = {
+	// 		put: "/v1/goods"
+	// 		body: "*"
+	// 	};
+	// };
+	// rpc DeleteGoods (DeleteGoodsRequest) returns (DeleteGoodsReply){
+	// 	option (google.api.http) = {
+	// 		delete: "/v1/goods/{id}"
+	// 	};
+	// };
+	rpc GetGoods (GetGoodsRequest) returns (GetGoodsReply){
 		option (google.api.http) = {
-			post: "/v1/goods"
-			body: "*"
+			get: "/v1/goods/{id}"
 		};
 	};
-	rpc UpdateGoods (UpdateGoodsRequest) returns (UpdateGoodsReply){
-
+	rpc ListGoods (ListGoodsRequest) returns (ListGoodsReply){
+		option (google.api.http) = {
+			get: "/v1/goods"
+		};
 	};
-	rpc DeleteGoods (DeleteGoodsRequest) returns (DeleteGoodsReply);
-	rpc GetGoods (GetGoodsRequest) returns (GetGoodsReply);
-	rpc ListGoods (ListGoodsRequest) returns (ListGoodsReply);
 }
 message Item {
 	int64 id = 1;

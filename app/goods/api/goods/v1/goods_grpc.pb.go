@@ -22,9 +22,23 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GoodsClient interface {
-	CreateGoods(ctx context.Context, in *CreateGoodsRequest, opts ...grpc.CallOption) (*CreateGoodsReply, error)
-	UpdateGoods(ctx context.Context, in *UpdateGoodsRequest, opts ...grpc.CallOption) (*UpdateGoodsReply, error)
-	DeleteGoods(ctx context.Context, in *DeleteGoodsRequest, opts ...grpc.CallOption) (*DeleteGoodsReply, error)
+	// rpc CreateGoods (CreateGoodsRequest) returns (CreateGoodsReply){
+	// 	option (google.api.http) = {
+	// 		post: "/v1/goods"
+	// 		body: "*"
+	// 	};
+	// };
+	// rpc UpdateGoods (UpdateGoodsRequest) returns (UpdateGoodsReply){
+	// 	option (google.api.http) = {
+	// 		put: "/v1/goods"
+	// 		body: "*"
+	// 	};
+	// };
+	// rpc DeleteGoods (DeleteGoodsRequest) returns (DeleteGoodsReply){
+	// 	option (google.api.http) = {
+	// 		delete: "/v1/goods/{id}"
+	// 	};
+	// };
 	GetGoods(ctx context.Context, in *GetGoodsRequest, opts ...grpc.CallOption) (*GetGoodsReply, error)
 	ListGoods(ctx context.Context, in *ListGoodsRequest, opts ...grpc.CallOption) (*ListGoodsReply, error)
 }
@@ -35,33 +49,6 @@ type goodsClient struct {
 
 func NewGoodsClient(cc grpc.ClientConnInterface) GoodsClient {
 	return &goodsClient{cc}
-}
-
-func (c *goodsClient) CreateGoods(ctx context.Context, in *CreateGoodsRequest, opts ...grpc.CallOption) (*CreateGoodsReply, error) {
-	out := new(CreateGoodsReply)
-	err := c.cc.Invoke(ctx, "/api.goods.v1.Goods/CreateGoods", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *goodsClient) UpdateGoods(ctx context.Context, in *UpdateGoodsRequest, opts ...grpc.CallOption) (*UpdateGoodsReply, error) {
-	out := new(UpdateGoodsReply)
-	err := c.cc.Invoke(ctx, "/api.goods.v1.Goods/UpdateGoods", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *goodsClient) DeleteGoods(ctx context.Context, in *DeleteGoodsRequest, opts ...grpc.CallOption) (*DeleteGoodsReply, error) {
-	out := new(DeleteGoodsReply)
-	err := c.cc.Invoke(ctx, "/api.goods.v1.Goods/DeleteGoods", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *goodsClient) GetGoods(ctx context.Context, in *GetGoodsRequest, opts ...grpc.CallOption) (*GetGoodsReply, error) {
@@ -86,9 +73,23 @@ func (c *goodsClient) ListGoods(ctx context.Context, in *ListGoodsRequest, opts 
 // All implementations must embed UnimplementedGoodsServer
 // for forward compatibility
 type GoodsServer interface {
-	CreateGoods(context.Context, *CreateGoodsRequest) (*CreateGoodsReply, error)
-	UpdateGoods(context.Context, *UpdateGoodsRequest) (*UpdateGoodsReply, error)
-	DeleteGoods(context.Context, *DeleteGoodsRequest) (*DeleteGoodsReply, error)
+	// rpc CreateGoods (CreateGoodsRequest) returns (CreateGoodsReply){
+	// 	option (google.api.http) = {
+	// 		post: "/v1/goods"
+	// 		body: "*"
+	// 	};
+	// };
+	// rpc UpdateGoods (UpdateGoodsRequest) returns (UpdateGoodsReply){
+	// 	option (google.api.http) = {
+	// 		put: "/v1/goods"
+	// 		body: "*"
+	// 	};
+	// };
+	// rpc DeleteGoods (DeleteGoodsRequest) returns (DeleteGoodsReply){
+	// 	option (google.api.http) = {
+	// 		delete: "/v1/goods/{id}"
+	// 	};
+	// };
 	GetGoods(context.Context, *GetGoodsRequest) (*GetGoodsReply, error)
 	ListGoods(context.Context, *ListGoodsRequest) (*ListGoodsReply, error)
 	mustEmbedUnimplementedGoodsServer()
@@ -98,15 +99,6 @@ type GoodsServer interface {
 type UnimplementedGoodsServer struct {
 }
 
-func (UnimplementedGoodsServer) CreateGoods(context.Context, *CreateGoodsRequest) (*CreateGoodsReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateGoods not implemented")
-}
-func (UnimplementedGoodsServer) UpdateGoods(context.Context, *UpdateGoodsRequest) (*UpdateGoodsReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateGoods not implemented")
-}
-func (UnimplementedGoodsServer) DeleteGoods(context.Context, *DeleteGoodsRequest) (*DeleteGoodsReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteGoods not implemented")
-}
 func (UnimplementedGoodsServer) GetGoods(context.Context, *GetGoodsRequest) (*GetGoodsReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGoods not implemented")
 }
@@ -124,60 +116,6 @@ type UnsafeGoodsServer interface {
 
 func RegisterGoodsServer(s grpc.ServiceRegistrar, srv GoodsServer) {
 	s.RegisterService(&Goods_ServiceDesc, srv)
-}
-
-func _Goods_CreateGoods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateGoodsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GoodsServer).CreateGoods(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.goods.v1.Goods/CreateGoods",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GoodsServer).CreateGoods(ctx, req.(*CreateGoodsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Goods_UpdateGoods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateGoodsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GoodsServer).UpdateGoods(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.goods.v1.Goods/UpdateGoods",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GoodsServer).UpdateGoods(ctx, req.(*UpdateGoodsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Goods_DeleteGoods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteGoodsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GoodsServer).DeleteGoods(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.goods.v1.Goods/DeleteGoods",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GoodsServer).DeleteGoods(ctx, req.(*DeleteGoodsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Goods_GetGoods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -223,18 +161,6 @@ var Goods_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.goods.v1.Goods",
 	HandlerType: (*GoodsServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "CreateGoods",
-			Handler:    _Goods_CreateGoods_Handler,
-		},
-		{
-			MethodName: "UpdateGoods",
-			Handler:    _Goods_UpdateGoods_Handler,
-		},
-		{
-			MethodName: "DeleteGoods",
-			Handler:    _Goods_DeleteGoods_Handler,
-		},
 		{
 			MethodName: "GetGoods",
 			Handler:    _Goods_GetGoods_Handler,

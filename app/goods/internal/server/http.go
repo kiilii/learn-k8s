@@ -1,7 +1,7 @@
 package server
 
 import (
-	v1 "goods/api/helloworld/v1"
+	v1 "goods/api/goods/v1"
 	"goods/internal/conf"
 	"goods/internal/service"
 
@@ -27,6 +27,6 @@ func NewHTTPServer(c *conf.Server, greeter *service.GoodsService, logger log.Log
 		opts = append(opts, http.Timeout(c.Http.Timeout.AsDuration()))
 	}
 	srv := http.NewServer(opts...)
-	v1.RegisterGreeterHTTPServer(srv, greeter)
+	v1.RegisterGoodsHTTPServer(srv, greeter)
 	return srv
 }
