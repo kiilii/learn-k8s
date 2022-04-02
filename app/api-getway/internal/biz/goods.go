@@ -1,12 +1,46 @@
 package biz
 
-import "context"
+import (
+	v1 "api-getway/api/goods/v1"
+	"context"
+)
+
+type Goods struct {
+	GoodsID   int64
+	GoodsName string
+	Price     float32
+}
 
 // GetGoods get goods by id
 func (uc *GetwayUsecase) GetGoods(ctx context.Context, id int64) (*Goods, error) {
-	return uc.repo.FindGoodsByID(ctx, id)
+	one, err := uc.goods.GetGoods(ctx, &v1.GetGoodsRequest{Id: id})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &Goods{
+		GoodsID:   one.Id,
+		GoodsName: one.GetName(),
+		Price:     one.Price,
+	}, err
 }
 
 func (uc *GetwayUsecase) ListAllGoods(ctx context.Context) ([]*Goods, error) {
-	return uc.repo.ListAllGoods(ctx)
+	reply, err := uc.goods.ListGoods(ctx, &v1.ListGoodsRequest{})
+	if err != nil {
+		return nil, err
+	}
+
+	items := reply.GetList()
+
+	var list = make([]*Goods, len(items))
+	for i, item := range items {
+		list[i] = &Goods{
+			GoodsID:   item.GetId(),
+			GoodsName: item.Name,
+			Price:     item.Price,
+		}
+	}
+	return list, err
 }

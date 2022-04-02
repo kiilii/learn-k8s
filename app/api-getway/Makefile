@@ -2,6 +2,7 @@ GOPATH:=$(shell go env GOPATH)
 VERSION=$(shell git describe --tags --always)
 INTERNAL_PROTO_FILES=$(shell find internal -name *.proto)
 API_PROTO_FILES=$(shell find api -name *.proto)
+SERVICE_NAME=api-getway
 
 .PHONY: init
 # init env
@@ -34,7 +35,7 @@ api:
 .PHONY: build
 # build
 build:
-	mkdir -p bin/ && go build -ldflags "-X main.Version=$(VERSION)" -o ./bin/ ./...
+	mkdir -p bin/ && go build -ldflags "-X main.Name=$(SERVICE_NAME) -X main.Version=$(VERSION)" -o ./bin/ ./...
 
 .PHONY: generate
 # generate

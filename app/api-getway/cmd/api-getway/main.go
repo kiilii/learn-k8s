@@ -5,9 +5,11 @@ import (
 	"os"
 
 	"api-getway/internal/conf"
+
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"
+	"github.com/go-kratos/kratos/v2/contrib/registry/etcd"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
@@ -30,7 +32,7 @@ func init() {
 	flag.StringVar(&flagconf, "conf", "../../configs", "config path, eg: -conf config.yaml")
 }
 
-func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server) *kratos.App {
+func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server, r *etcd.Registry) *kratos.App {
 	return kratos.New(
 		kratos.ID(id),
 		kratos.Name(Name),
@@ -41,6 +43,7 @@ func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server) *kratos.App {
 			hs,
 			gs,
 		),
+		kratos.Registrar(r),
 	)
 }
 
@@ -71,7 +74,7 @@ func main() {
 		panic(err)
 	}
 
-	app, cleanup, err := wireApp(bc.Server, bc.Data, logger)
+	app, cleanup, err := wireApp(bc.Server, bc.Data, bc.Naming, logger)
 	if err != nil {
 		panic(err)
 	}

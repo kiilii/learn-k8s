@@ -28,10 +28,9 @@ func wireApp(confServer *conf.Server, confData *conf.Data, naming *conf.Naming, 
 	goodsRepo := data.NewGoodsRepo(dataData, logger)
 	goodsUsecase := biz.NewGoodsUsecase(goodsRepo, logger)
 	goodsService := service.NewGoodsService(goodsUsecase)
-	httpServer := server.NewHTTPServer(confServer, goodsService, logger)
 	grpcServer := server.NewGRPCServer(confServer, goodsService, logger)
 	registrar := client.NewEtcdClient(naming)
-	app := newApp(logger, httpServer, grpcServer, registrar)
+	app := newApp(logger, grpcServer, registrar)
 	return app, func() {
 		cleanup()
 	}, nil
