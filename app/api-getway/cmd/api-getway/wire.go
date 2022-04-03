@@ -7,8 +7,8 @@ package main
 
 import (
 	"api-getway/internal/biz"
-	"api-getway/internal/client"
 	"api-getway/internal/conf"
+	"api-getway/internal/data"
 	"api-getway/internal/server"
 	"api-getway/internal/service"
 	"github.com/go-kratos/kratos/v2"
@@ -23,7 +23,7 @@ func wireApp(*conf.Server, *conf.Data, *conf.Naming, log.Logger) (*kratos.App, f
 			server.ProviderSet,
 			biz.ProviderSet,
 			service.ProviderSet,
-			client.ProviderSet,
+			data.ProviderSet,
 			newApp,
 		),
 	)

@@ -8,8 +8,8 @@ package main
 
 import (
 	"api-getway/internal/biz"
-	"api-getway/internal/client"
 	"api-getway/internal/conf"
+	"api-getway/internal/data"
 	"api-getway/internal/server"
 	"api-getway/internal/service"
 	"github.com/go-kratos/kratos/v2"
@@ -19,13 +19,16 @@ import (
 // Injectors from wire.go:
 
 // wireApp init kratos application.
-func wireApp(confServer *conf.Server, data *conf.Data, naming *conf.Naming, logger log.Logger) (*kratos.App, func(), error) {
-	registry := client.NewEtcdClient(naming)
-	getwayUsecase := biz.NewGetwayUsecase(registry, logger)
+func wireApp(confServer *conf.Server, confData *conf.Data, naming *conf.Naming, logger log.Logger) (*kratos.App, func(), error) {
+	discovery := data.NewDiscovery(naming)
+	goodsClient := biz.NewGoodsServiceClient(discovery, logger)
+	userClient := biz.NewUserServiceClient(discovery, logger)
+	getwayUsecase := biz.NewGetwayUsecase(goodsClient, userClient, logger)
 	getwayService := service.NewGetwayService(getwayUsecase)
 	httpServer := server.NewHTTPServer(confServer, getwayService, logger)
 	grpcServer := server.NewGRPCServer(confServer, getwayService, logger)
-	app := newApp(logger, httpServer, grpcServer, registry)
+	registrar := data.NewRegistrar(naming)
+	app := newApp(logger, httpServer, grpcServer, registrar)
 	return app, func() {
 	}, nil
 }
