@@ -19,8 +19,8 @@ func faker() *Data {
 		1: {ID: 1, Name: "豆浆", Price: 3},
 		2: {ID: 2, Name: "油条", Price: 2},
 		3: {ID: 3, Name: "热干面", Price: 4.5},
-		4: {ID: 4, Name: "热干面", Price: 4.5},
-		5: {ID: 5, Name: "热干面", Price: 4.5},
+		4: {ID: 4, Name: "杂粮煎饼", Price: 5},
+		5: {ID: 5, Name: "酱饼", Price: 5},
 	}
 	return &Data{m: faker, count: int64(len(faker)), mu: new(sync.RWMutex)}
 }

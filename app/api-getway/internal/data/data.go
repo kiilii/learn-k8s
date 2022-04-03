@@ -9,12 +9,8 @@ import (
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
-var ns = "api-getway"
+var ns = "/learn-k8s"
 var ProviderSet = wire.NewSet(NewDiscovery, NewRegistrar)
-
-// func NewEtcdConf() *conf.Naming {
-// 	return nil
-// }
 
 func NewDiscovery(c *conf.Naming) registry.Discovery {
 	client, err := clientv3.New(clientv3.Config{
@@ -29,7 +25,7 @@ func NewDiscovery(c *conf.Naming) registry.Discovery {
 	if err != nil {
 		panic(err)
 	}
-	return etcd.New(client)
+	return etcd.New(client, etcd.Namespace(ns))
 }
 
 func NewRegistrar(c *conf.Naming) registry.Registrar {
@@ -46,5 +42,5 @@ func NewRegistrar(c *conf.Naming) registry.Registrar {
 		panic(err)
 	}
 
-	return etcd.New(client)
+	return etcd.New(client, etcd.Namespace(ns))
 }

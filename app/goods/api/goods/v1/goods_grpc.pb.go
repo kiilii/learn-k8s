@@ -39,16 +39,6 @@ type GoodsClient interface {
 	// 		delete: "/v1/goods/{id}"
 	// 	};
 	// };
-	// rpc GetGoods (GetGoodsRequest) returns (GetGoodsReply){
-	// 	option (google.api.http) = {
-	// 		get: "/v1/goods/{id}"
-	// 	};
-	// };
-	// rpc ListGoods (ListGoodsRequest) returns (ListGoodsReply){
-	// 	option (google.api.http) = {
-	// 		get: "/v1/goods"
-	// 	};
-	// };
 	GetGoods(ctx context.Context, in *GetGoodsRequest, opts ...grpc.CallOption) (*GetGoodsReply, error)
 	ListGoods(ctx context.Context, in *ListGoodsRequest, opts ...grpc.CallOption) (*ListGoodsReply, error)
 }
@@ -98,16 +88,6 @@ type GoodsServer interface {
 	// rpc DeleteGoods (DeleteGoodsRequest) returns (DeleteGoodsReply){
 	// 	option (google.api.http) = {
 	// 		delete: "/v1/goods/{id}"
-	// 	};
-	// };
-	// rpc GetGoods (GetGoodsRequest) returns (GetGoodsReply){
-	// 	option (google.api.http) = {
-	// 		get: "/v1/goods/{id}"
-	// 	};
-	// };
-	// rpc ListGoods (ListGoodsRequest) returns (ListGoodsReply){
-	// 	option (google.api.http) = {
-	// 		get: "/v1/goods"
 	// 	};
 	// };
 	GetGoods(context.Context, *GetGoodsRequest) (*GetGoodsReply, error)

@@ -4,6 +4,12 @@ INTERNAL_PROTO_FILES=$(shell find internal -name *.proto)
 API_PROTO_FILES=$(shell find api -name *.proto)
 SERVICE_NAME=goods
 
+.PHONY: proxy
+# proxy set goproxy
+proxy:
+	go env -w GO111MODULE=on
+	go env -w GOPROXY=https://goproxy.cn,direct
+
 .PHONY: init
 # init env
 init:

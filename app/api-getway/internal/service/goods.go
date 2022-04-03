@@ -23,6 +23,10 @@ func (s *GetwayService) ListGoods(ctx context.Context, in *v1.ListGoodsRequest) 
 		return nil, err
 	}
 
+	// items := []*biz.Goods{
+	// 	{GoodsID: 1, GoodsName: "豆浆", Price: 3},
+	// }
+
 	var list []*v1.Goods = make([]*v1.Goods, len(items))
 	for i, item := range items {
 		list[i] = &v1.Goods{

@@ -10,7 +10,6 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
 	"goods/internal/biz"
-	"goods/internal/client"
 	"goods/internal/conf"
 	"goods/internal/data"
 	"goods/internal/server"
@@ -25,7 +24,6 @@ func wireApp(*conf.Server, *conf.Data, *conf.Naming, log.Logger) (*kratos.App, f
 			data.ProviderSet,
 			biz.ProviderSet,
 			service.ProviderSet,
-			client.ProviderSet,
 			newApp,
 		),
 	)

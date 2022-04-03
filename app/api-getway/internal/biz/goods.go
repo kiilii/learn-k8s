@@ -3,6 +3,7 @@ package biz
 import (
 	v1 "api-getway/api/goods/v1"
 	"context"
+	"fmt"
 )
 
 type Goods struct {
@@ -29,6 +30,7 @@ func (uc *GetwayUsecase) GetGoods(ctx context.Context, id int64) (*Goods, error)
 func (uc *GetwayUsecase) ListAllGoods(ctx context.Context) ([]*Goods, error) {
 	reply, err := uc.goods.ListGoods(ctx, &v1.ListGoodsRequest{})
 	if err != nil {
+		fmt.Println("[list]:", err)
 		return nil, err
 	}
 

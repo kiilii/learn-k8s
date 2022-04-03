@@ -3,6 +3,7 @@ package biz
 import (
 	goodsv1 "api-getway/api/goods/v1"
 	userv1 "api-getway/api/user/v1"
+	"fmt"
 
 	"context"
 
@@ -34,7 +35,7 @@ func NewGetwayUsecase(gs goodsv1.GoodsClient, us userv1.UserClient, logger log.L
 }
 
 func NewGoodsServiceClient(reg registry.Discovery, logger log.Logger) goodsv1.GoodsClient {
-	var endpoint = "discovery:////microservices/api-getway"
+	var endpoint = "discovery:///goods"
 
 	rpc, err := grpc.DialInsecure(
 		context.TODO(),
@@ -45,15 +46,22 @@ func NewGoodsServiceClient(reg registry.Discovery, logger log.Logger) goodsv1.Go
 			logging.Client(logger),
 		),
 	)
+
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("[gs:]", rpc.GetState())
+	gss, _ := reg.GetService(context.TODO(), "goods")
+	for _, gs := range gss {
+		fmt.Println("[gs:]", gs)
+	}
+	fmt.Println("[gs:]", rpc.Target())
 
 	return goodsv1.NewGoodsClient(rpc)
 }
 
 func NewUserServiceClient(reg registry.Discovery, logger log.Logger) userv1.UserClient {
-	var endpoint = "discovery:////microservices/user"
+	var endpoint = "discovery:///user"
 
 	rpc, err := grpc.DialInsecure(
 		context.TODO(),
@@ -67,5 +75,8 @@ func NewUserServiceClient(reg registry.Discovery, logger log.Logger) userv1.User
 	if err != nil {
 		panic(err)
 	}
+
+	// fmt.Println("[us:]", rpc.GetState().String())
+	// fmt.Println("[us:]", rpc.GetMethodConfig())
 	return userv1.NewUserClient(rpc)
 }
