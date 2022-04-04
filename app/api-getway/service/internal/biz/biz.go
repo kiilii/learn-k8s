@@ -53,7 +53,7 @@ func NewGoodsServiceClient(reg registry.Discovery, logger log.Logger) goodsv1.Go
 }
 
 func NewUserServiceClient(reg registry.Discovery, logger log.Logger) userv1.UserClient {
-	var endpoint = "discovery:///app.goods.service"
+	var endpoint = "discovery:///app.user.service"
 
 	rpc, err := grpc.DialInsecure(
 		context.TODO(),

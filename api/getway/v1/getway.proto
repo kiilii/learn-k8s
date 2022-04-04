@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package getway.v1;
+package api.getway.v1;
 
 import "google/api/annotations.proto";
 

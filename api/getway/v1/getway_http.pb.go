@@ -39,7 +39,7 @@ func _Getway_SayHello0_HTTP_Handler(srv GetwayHTTPServer) func(ctx http.Context)
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/getway.v1.Getway/SayHello")
+		http.SetOperation(ctx, "/api.getway.v1.Getway/SayHello")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.SayHello(ctx, req.(*HelloRequest))
 		})
@@ -61,7 +61,7 @@ func _Getway_GetGoods0_HTTP_Handler(srv GetwayHTTPServer) func(ctx http.Context)
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/getway.v1.Getway/GetGoods")
+		http.SetOperation(ctx, "/api.getway.v1.Getway/GetGoods")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetGoods(ctx, req.(*GetGoodsRequest))
 		})
@@ -80,7 +80,7 @@ func _Getway_ListGoods0_HTTP_Handler(srv GetwayHTTPServer) func(ctx http.Context
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/getway.v1.Getway/ListGoods")
+		http.SetOperation(ctx, "/api.getway.v1.Getway/ListGoods")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListGoods(ctx, req.(*ListGoodsRequest))
 		})
@@ -111,7 +111,7 @@ func (c *GetwayHTTPClientImpl) GetGoods(ctx context.Context, in *GetGoodsRequest
 	var out GetGoodsReply
 	pattern := "/goods/{goods_id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/getway.v1.Getway/GetGoods"))
+	opts = append(opts, http.Operation("/api.getway.v1.Getway/GetGoods"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -124,7 +124,7 @@ func (c *GetwayHTTPClientImpl) ListGoods(ctx context.Context, in *ListGoodsReque
 	var out ListGoodsReply
 	pattern := "/goods"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/getway.v1.Getway/ListGoods"))
+	opts = append(opts, http.Operation("/api.getway.v1.Getway/ListGoods"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -137,7 +137,7 @@ func (c *GetwayHTTPClientImpl) SayHello(ctx context.Context, in *HelloRequest, o
 	var out HelloReply
 	pattern := "/helloworld/{name}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/getway.v1.Getway/SayHello"))
+	opts = append(opts, http.Operation("/api.getway.v1.Getway/SayHello"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

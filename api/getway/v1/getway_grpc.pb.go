@@ -38,7 +38,7 @@ func NewGetwayClient(cc grpc.ClientConnInterface) GetwayClient {
 
 func (c *getwayClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
 	out := new(HelloReply)
-	err := c.cc.Invoke(ctx, "/getway.v1.Getway/SayHello", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.getway.v1.Getway/SayHello", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (c *getwayClient) SayHello(ctx context.Context, in *HelloRequest, opts ...g
 
 func (c *getwayClient) GetGoods(ctx context.Context, in *GetGoodsRequest, opts ...grpc.CallOption) (*GetGoodsReply, error) {
 	out := new(GetGoodsReply)
-	err := c.cc.Invoke(ctx, "/getway.v1.Getway/GetGoods", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.getway.v1.Getway/GetGoods", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (c *getwayClient) GetGoods(ctx context.Context, in *GetGoodsRequest, opts .
 
 func (c *getwayClient) ListGoods(ctx context.Context, in *ListGoodsRequest, opts ...grpc.CallOption) (*ListGoodsReply, error) {
 	out := new(ListGoodsReply)
-	err := c.cc.Invoke(ctx, "/getway.v1.Getway/ListGoods", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.getway.v1.Getway/ListGoods", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ func _Getway_SayHello_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/getway.v1.Getway/SayHello",
+		FullMethod: "/api.getway.v1.Getway/SayHello",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GetwayServer).SayHello(ctx, req.(*HelloRequest))
@@ -128,7 +128,7 @@ func _Getway_GetGoods_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/getway.v1.Getway/GetGoods",
+		FullMethod: "/api.getway.v1.Getway/GetGoods",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GetwayServer).GetGoods(ctx, req.(*GetGoodsRequest))
@@ -146,7 +146,7 @@ func _Getway_ListGoods_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/getway.v1.Getway/ListGoods",
+		FullMethod: "/api.getway.v1.Getway/ListGoods",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GetwayServer).ListGoods(ctx, req.(*ListGoodsRequest))
@@ -158,7 +158,7 @@ func _Getway_ListGoods_Handler(srv interface{}, ctx context.Context, dec func(in
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Getway_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "getway.v1.Getway",
+	ServiceName: "api.getway.v1.Getway",
 	HandlerType: (*GetwayServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
