@@ -7,7 +7,7 @@
         "options": [
             "--proto_path=${workspaceRoot}/api",
             "--proto_path=${workspaceRoot}/third_party",
-            "--go_out=paths=source_relative:${workspaceRoot}/api ",
+            "--go_out=paths=source_relative:${workspaceRoot}/api",
             "--go-http_out=paths=source_relative:${workspaceRoot}/api",
             "--go-grpc_out=paths=source_relative:${workspaceRoot}/api",
             "--openapi_out==paths=source_relative:${workspaceRoot}",
