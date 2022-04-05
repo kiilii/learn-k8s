@@ -29,7 +29,7 @@ func wireApp(confServer *conf.Server, confData *conf.Data, naming *conf.Naming, 
 	goodsService := service.NewGoodsService(goodsUsecase)
 	httpServer := server.NewHTTPServer(confServer, goodsService, logger)
 	grpcServer := server.NewGRPCServer(confServer, goodsService, logger)
-	registrar := biz.NewRegistrar(naming)
+	registrar := data.NewRegistrar(naming)
 	app := newApp(logger, httpServer, grpcServer, registrar)
 	return app, func() {
 		cleanup()
