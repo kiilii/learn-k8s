@@ -30,33 +30,33 @@
                 "name": "getway.service",
                 "type": "go",
                 "request": "launch",
-                "mode": "auto",
-                "program": "${workspaceRoot}/app/api-getway/service/cmd/server/main.go",
+                "mode": "exec",
+                "program": "${workspaceRoot}/app/api-getway/service/bin/server",
                 "args": [
                     "-conf",
-                    "${workspaceRoot}/app/api-getway/service/config/config.yaml"
+                    "${workspaceRoot}/app/api-getway/service/configs/config.yaml",
                 ]
             },
             {
                 "name": "goods.service",
                 "type": "go",
                 "request": "launch",
-                "mode": "auto",
-                "program": "${workspaceRoot}/app/goods/service/cmd/server/main.go",
+                "mode": "exec",
+                "program": "${workspaceRoot}/app/goods/service/bin/server",
                 "args": [
                     "-conf",
-                    "${workspaceRoot}/app/api-getway/service/config/config.yaml"
+                    "${workspaceRoot}/app/goods/service/configs/config.yaml",
                 ]
             },
             {
                 "name": "user.service",
                 "type": "go",
                 "request": "launch",
-                "mode": "auto",
-                "program": "${workspaceRoot}/app/user/service/cmd/server/main.go",
+                "mode": "exec",
+                "program": "${workspaceRoot}/app/user/service/bin/server",
                 "args": [
                     "-conf",
-                    "${workspaceRoot}/app/api-getway/service/config/config.yaml"
+                    "${workspaceRoot}/app/user/service/configs/config.yaml"
                 ]
             }
         ],
