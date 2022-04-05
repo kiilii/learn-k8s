@@ -3,7 +3,7 @@ package data
 import (
 	"learn-k8s/app/api-getway/service/internal/conf"
 
-	"github.com/go-kratos/kratos/v2/contrib/registry/etcd"
+	etcd "github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/google/wire"
 	clientv3 "go.etcd.io/etcd/client/v3"

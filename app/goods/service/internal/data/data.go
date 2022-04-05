@@ -5,7 +5,7 @@ import (
 	"learn-k8s/app/goods/service/internal/conf"
 	"sync"
 
-	"github.com/go-kratos/kratos/v2/contrib/registry/etcd"
+	etcd "github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/google/wire"
@@ -13,7 +13,7 @@ import (
 )
 
 // ProviderSet is data providers.
-var ProviderSet = wire.NewSet(NewData, NewGoodsRepo,NewDiscovery,NewRegistrar)
+var ProviderSet = wire.NewSet(NewData, NewGoodsRepo, NewDiscovery, NewRegistrar)
 
 // Data .
 type Data struct {

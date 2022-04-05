@@ -4,7 +4,7 @@ import (
 	"context"
 	"learn-k8s/app/user/service/internal/conf"
 
-	"github.com/go-kratos/kratos/v2/contrib/registry/etcd"
+	etcd "github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/go-redis/redis/v8"
