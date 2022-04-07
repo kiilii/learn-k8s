@@ -23,6 +23,7 @@ WORKDIR /app
 
 EXPOSE 8000
 EXPOSE 9000
-VOLUME /data/conf
+COPY --from=builder /src/app/${APP_RELATIVE_PATH}/configs /data/conf
+# VOLUME /data/conf
 
 CMD ["./server", "-conf", "/data/conf"]
