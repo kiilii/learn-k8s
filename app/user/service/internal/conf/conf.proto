@@ -50,3 +50,7 @@ message Naming {
   }
   Etcd etcd = 1;
 }
+
+message Trace {
+  string endpoint = 1;
+}

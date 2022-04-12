@@ -17,3 +17,6 @@ naming:
   etcd:
     addr: 
       - 192.168.199.237:2379
+
+trance:
+  endpoint:
