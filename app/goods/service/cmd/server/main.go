@@ -14,6 +14,10 @@ import (
 	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
+	"go.opentelemetry.io/otel/exporters/jaeger"
+	"go.opentelemetry.io/otel/sdk/resource"
+	tracesdk "go.opentelemetry.io/otel/sdk/trace"
+	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 )
 
 // go build -ldflags "-X main.Version=x.y.z"
@@ -73,8 +77,23 @@ func main() {
 	if err := c.Scan(&bc); err != nil {
 		panic(err)
 	}
+	var tc conf.Trace
+	if err := c.Scan(&tc); err != nil {
+		panic(err)
+	}
 
-	app, cleanup, err := wireApp(bc.Server, bc.Data, bc.Naming, logger)
+	exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(tc.Endpoint)))
+	if err != nil {
+		panic(err)
+	}
+
+	tp := tracesdk.NewTracerProvider(
+		tracesdk.WithBatcher(exp),
+		tracesdk.WithResource(resource.NewSchemaless(
+			semconv.ServiceNameKey.String(Name))),
+	)
+
+	app, cleanup, err := wireApp(bc.Server, bc.Data, bc.Naming, logger, tp)
 	if err != nil {
 		panic(err)
 	}
