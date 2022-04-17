@@ -14,10 +14,11 @@ import (
 	"learn-k8s/app/api-getway/service/internal/data"
 	"learn-k8s/app/api-getway/service/internal/server"
 	"learn-k8s/app/api-getway/service/internal/service"
+	"go.opentelemetry.io/otel/sdk/trace"
 )
 
 // wireApp init kratos application.
-func wireApp(*conf.Server, *conf.Data, *conf.Naming, log.Logger) (*kratos.App, func(), error) {
+func wireApp(*conf.Server, *conf.Data, *conf.Naming, log.Logger, *trace.TracerProvider) (*kratos.App, func(), error) {
 	panic(
 		wire.Build(
 			server.ProviderSet,
