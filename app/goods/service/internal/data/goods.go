@@ -7,6 +7,7 @@ import (
 	"learn-k8s/app/goods/service/internal/biz"
 
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/google/uuid"
 )
 
 type goodsRepo struct {
@@ -22,7 +23,8 @@ func faker() *Data {
 		4: {ID: 4, Name: "杂粮煎饼", Price: 5},
 		5: {ID: 5, Name: "酱饼", Price: 5},
 	}
-	return &Data{m: faker, count: int64(len(faker)), mu: new(sync.RWMutex)}
+
+	return &Data{m: faker, count: int64(len(faker)), mu: new(sync.RWMutex), sign: uuid.NewString()}
 }
 
 // NewGoodsRepo .

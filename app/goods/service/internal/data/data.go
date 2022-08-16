@@ -22,6 +22,8 @@ type Data struct {
 	m     map[int64]*biz.Goods
 	count int64
 	mu    *sync.RWMutex
+
+	sign string
 }
 
 // NewData .
