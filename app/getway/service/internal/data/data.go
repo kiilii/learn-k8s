@@ -1,7 +1,7 @@
 package data
 
 import (
-	"learn-k8s/app/api-getway/service/internal/conf"
+	"learn-k8s/app/getway/service/internal/conf"
 
 	etcd "github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	"github.com/go-kratos/kratos/v2/registry"

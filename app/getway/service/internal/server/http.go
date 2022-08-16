@@ -2,8 +2,8 @@ package server
 
 import (
 	v1 "learn-k8s/api/getway/v1"
-	"learn-k8s/app/api-getway/service/internal/conf"
-	"learn-k8s/app/api-getway/service/internal/service"
+	"learn-k8s/app/getway/service/internal/conf"
+	"learn-k8s/app/getway/service/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"

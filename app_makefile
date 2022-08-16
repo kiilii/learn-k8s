@@ -8,6 +8,18 @@ KRATOS=$(GOPATH)/pkg/mod/github.com/go-kratos/kratos/v2@$(KRATOS_VERSION)
 APP_NAME=$(shell echo $(APP_RELATIVE_PATH) | sed -En "s/\//-/p")
 DOCKER_IMAGE=$(shell echo $(APP_NAME) |awk -F '@' '{print "learn-k8s/app-" $$0 ":0.1.0"}')
 
+.PHONY: print
+print:
+	echo "GOPATH $(GOPATH)"
+	echo "VERSION $(VERSION)"
+	echo "APP_RELATIVE_PATH $(APP_RELATIVE_PATH)"
+	echo "INTERNAL_PROTO_FILES $(INTERNAL_PROTO_FILES)"
+	echo "API_PROTO_FILES $(API_PROTO_FILES)"
+	echo "KRATOS_VERSION $(KRATOS_VERSION)"
+	echo "KRATOS $(KRATOS)"
+	echo "APP_NAME $(APP_NAME)"
+	echo "DOCKER_IMAGE $(DOCKER_IMAGE)"
+
 .PHONY: init
 # init env
 init:
@@ -100,6 +112,11 @@ api: grpc http swagger errors
 .PHONY: all
 # generate all
 all: grpc http proto generate build test
+
+.PHONY: images
+# build docker images
+images: build
+	docker build -t $(DOCKER_IMAGE) .
 
 # show help
 help:

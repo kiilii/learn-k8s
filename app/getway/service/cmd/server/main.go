@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"learn-k8s/app/api-getway/service/internal/conf"
+	"learn-k8s/app/getway/service/internal/conf"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"

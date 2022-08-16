@@ -2,7 +2,7 @@ package service
 
 import (
 	v1 "learn-k8s/api/getway/v1"
-	"learn-k8s/app/api-getway/service/internal/biz"
+	"learn-k8s/app/getway/service/internal/biz"
 
 	"github.com/google/wire"
 )

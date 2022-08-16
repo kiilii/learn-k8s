@@ -10,11 +10,11 @@ import (
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"go.opentelemetry.io/otel/sdk/trace"
-	"learn-k8s/app/api-getway/service/internal/biz"
-	"learn-k8s/app/api-getway/service/internal/conf"
-	"learn-k8s/app/api-getway/service/internal/data"
-	"learn-k8s/app/api-getway/service/internal/server"
-	"learn-k8s/app/api-getway/service/internal/service"
+	"learn-k8s/app/getway/service/internal/biz"
+	"learn-k8s/app/getway/service/internal/conf"
+	"learn-k8s/app/getway/service/internal/data"
+	"learn-k8s/app/getway/service/internal/server"
+	"learn-k8s/app/getway/service/internal/service"
 )
 
 // Injectors from wire.go:
