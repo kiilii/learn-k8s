@@ -1,10 +1,41 @@
 version: '3'
 
 services:
-  rancher:
-    image: "rancher/rancher:stable"
-    container_name: rancher
-    expose:
-      - 80: 80
-      - 443: 443
-    
+  etcd:
+    hostname: etcd
+    image: bitnami/etcd:latest # https://github.com/bitnami/bitnami-docker-etcd
+    container_name: etcd
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    ports:
+      - 2379:2379
+      - 2380:2380
+  getway:
+    image: kilii/app-getway-service:latest
+    container_name: getway
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - user-rpc
+      - goods-rpc
+
+  user-rpc:
+    image: kilii/app-user-service:latest
+    container_name: user_rpc
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+    depends_on:
+      - etcd
+
+  goods-rpc:
+    image: kilii/app-goods-service:latest
+    container_name: goods_rpc
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+    depends_on:
+      - etcd
+      
