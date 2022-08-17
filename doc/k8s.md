@@ -86,3 +86,31 @@ spec:         　　　　　　　#必选，Pod中容器的详细定义
         - key: string
           path: string
 ```
+
+
+### 操作语法
+
+``` sh
+### minikube 操作语法
+
+#进入节点机器
+minikube ssh
+
+
+minikube dashboard
+```
+
+
+``` sh
+# 获取所有 pods 信息
+kubectl get pods
+
+# 获取 pod 详情
+kubectl describe pod [pod-name]
+# 获取 k8s 某 service 详情
+kubectl describe service [service-name]
+
+# 获取具体 pod 的日志
+kubectl logs -f [pod-fullname]
+
+```
