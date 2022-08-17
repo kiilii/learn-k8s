@@ -10,7 +10,7 @@ data:
     driver: mysql
     source: root:root@tcp(localhost:3306)/test
   redis:
-    addr: 10.104.119.122:2379
+    addr: 10.104.119.122:6374
     read_timeout: 0.2s
     write_timeout: 0.2s
 naming:
