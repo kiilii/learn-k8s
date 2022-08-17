@@ -24,7 +24,7 @@ spec:
         io.kompose.service: getway
     spec:
       containers:
-        - image: kilii/app-getway-service:latest
+        - image: kilii/app-getway-service:0.1.0
           name: getway
           ports:
             - containerPort: 80

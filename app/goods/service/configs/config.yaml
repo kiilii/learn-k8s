@@ -10,13 +10,13 @@ data:
     driver: mysql
     source: root:root@tcp(localhost:3306)/test
   redis:
-    addr: localhost:6379
+    addr: 10.104.119.122:2379
     read_timeout: 0.2s
     write_timeout: 0.2s
 naming:
   etcd:
     addr: 
-      - localhost:2379
+      - 10.106.161.119:2379
     # username: ""
     # password: ""
     # timeout: 30

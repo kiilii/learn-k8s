@@ -16,15 +16,16 @@ type goodsRepo struct {
 }
 
 func faker() *Data {
+	var sign = uuid.NewString()
 	var faker = map[int64]*biz.Goods{
-		1: {ID: 1, Name: "豆浆", Price: 3},
-		2: {ID: 2, Name: "油条", Price: 2},
-		3: {ID: 3, Name: "热干面", Price: 4.5},
-		4: {ID: 4, Name: "杂粮煎饼", Price: 5},
-		5: {ID: 5, Name: "酱饼", Price: 5},
+		1: {ID: 1, Name: "豆浆", Price: 3, Sign: sign},
+		2: {ID: 2, Name: "油条", Price: 2, Sign: sign},
+		3: {ID: 3, Name: "热干面", Price: 4.5, Sign: sign},
+		4: {ID: 4, Name: "杂粮煎饼", Price: 5, Sign: sign},
+		5: {ID: 5, Name: "酱饼", Price: 5, Sign: sign},
 	}
 
-	return &Data{m: faker, count: int64(len(faker)), mu: new(sync.RWMutex), sign: uuid.NewString()}
+	return &Data{m: faker, count: int64(len(faker)), mu: new(sync.RWMutex), sign: sign}
 }
 
 // NewGoodsRepo .
@@ -82,6 +83,7 @@ func (r *goodsRepo) ListAll(context.Context) ([]*biz.Goods, error) {
 			ID:    item.ID,
 			Name:  item.Name,
 			Price: item.Price,
+			Sign:  item.Sign,
 		})
 	}
 

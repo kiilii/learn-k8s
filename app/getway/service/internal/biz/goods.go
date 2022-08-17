@@ -10,6 +10,7 @@ type Goods struct {
 	GoodsID   int64
 	GoodsName string
 	Price     float32
+	Sign      string
 }
 
 // GetGoods get goods by id

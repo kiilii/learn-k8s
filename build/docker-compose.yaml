@@ -11,8 +11,15 @@ services:
     ports:
       - 2379:2379
       - 2380:2380
+  redis:
+    hostname: redis
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - 6379:6379
+
   getway:
-    image: kilii/app-getway-service:latest
+    image: kilii/app-getway-service:0.1.0
     container_name: getway
     ports:
       - "80:80"
@@ -22,7 +29,7 @@ services:
       - goods-rpc
 
   user-rpc:
-    image: kilii/app-user-service:latest
+    image: kilii/app-user-service:0.1.0
     container_name: user_rpc
     ports:
       - "8000:8000"
@@ -31,7 +38,7 @@ services:
       - etcd
 
   goods-rpc:
-    image: kilii/app-goods-service:latest
+    image: kilii/app-goods-service:0.1.0
     container_name: goods_rpc
     ports:
       - "8000:8000"

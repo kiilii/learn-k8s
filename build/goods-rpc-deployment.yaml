@@ -24,7 +24,7 @@ spec:
         io.kompose.service: goods-rpc
     spec:
       containers:
-        - image: kilii/app-goods-service:latest
+        - image: kilii/app-goods-service:0.1.0
           name: goods-rpc
           ports:
             - containerPort: 8000

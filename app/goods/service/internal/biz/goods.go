@@ -17,8 +17,9 @@ var (
 // Goods is a Goods model.
 type Goods struct {
 	ID    int64
-	Name  string
 	Price float32
+	Name  string
+	Sign  string
 }
 
 // GoodsRepo is a Goods repo.
