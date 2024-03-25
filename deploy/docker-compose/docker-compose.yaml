@@ -9,9 +9,15 @@ services:
   #     - 6379:6379
 
   order-svc:
-    image: kilii/svc-app-order:0.1.0
-    container_name: goods_svc
+    image: order:latest
+    container_name: order.svc
     ports:
       - "8080:8080"
       - "8888:8888"
       
+  greet-svc:
+    image: greet:latest
+    container_name: greet.svc
+    ports:
+      - "8080:8080"
+      - "8888:8888"

@@ -28,4 +28,4 @@ WORKDIR /app
 COPY --from=builder /app/order /app/order
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./order", "-f", "etc/order.yaml"]
+CMD ["./order", "-f", "etc/config.yaml"]
