@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  # redis:
+  #   hostname: redis
+  #   image: redis:alpine
+  #   container_name: redis
+  #   ports:
+  #     - 6379:6379
+
+  order-svc:
+    image: kilii/svc-app-order:0.1.0
+    container_name: goods_svc
+    ports:
+      - "8080:8080"
+      - "8888:8888"
+      

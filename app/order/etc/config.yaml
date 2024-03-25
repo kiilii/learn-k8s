@@ -1,0 +1,25 @@
+Name: order.rpc
+ListenOn: 0.0.0.0:8080
+Mode: dev
+DevServer: 
+  Enable: true
+# Log:
+#   Mode: volume
+#   Path: /var/logs
+#   KeepDays: 2
+#   Rotation: size
+#   MaxSize: 25
+#   MaxBackups: 30
+
+Gateway:
+  Name: order.api
+  Host: localhost
+  Port: 8888
+  Upstreams:
+  - Grpc:
+      Target: localhost:8080
+      # Mappings can also be written in proto options
+    Mappings:
+      - Method: get
+        Path: /ping
+        RpcPath: order.Order/Ping
