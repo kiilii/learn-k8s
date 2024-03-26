@@ -1,5 +1,5 @@
 Name: order.rpc
-ListenOn: 0.0.0.0:8080
+ListenOn: 0.0.0.0:8888
 Mode: dev
 DevServer: 
   Enable: true
@@ -13,11 +13,11 @@ DevServer:
 
 Gateway:
   Name: order.api
-  Host: localhost
-  Port: 8888
+  # Host: localhost
+  Port: 9999
   Upstreams:
   - Grpc:
-      Target: localhost:8080
+      Target: 0.0.0.0:8888
       # Mappings can also be written in proto options
     Mappings:
       - Method: get

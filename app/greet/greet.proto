@@ -5,10 +5,11 @@ package greet;
 option go_package = "./greet";
 
 message Request {
+  string ping = 1;
 }
 
 message Response {
-  string msg = 1;
+  string pong = 1;
 }
 
 service Greet {

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"learn-k8s/app/order/internal/svc"
 	"learn-k8s/app/order/order"
@@ -27,6 +28,6 @@ func (l *PingLogic) Ping(in *order.Request) (*order.Response, error) {
 	// todo: add your logic here and delete this line
 
 	return &order.Response{
-		Pong: "order.Order/Ping",
+		Pong: fmt.Sprintf("order.Order/Ping: %s", in.GetPing()),
 	}, nil
 }

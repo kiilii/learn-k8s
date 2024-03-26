@@ -1,18 +1,23 @@
 Name: greet.rpc
-ListenOn: 0.0.0.0:8080
+ListenOn: 0.0.0.0:8888
 Mode: dev
-Etcd:
-  Hosts:
-  - 127.0.0.1:2379
-  Key: greet.rpc
+DevServer: 
+  Enable: true
+# Log:
+#   Mode: volume
+#   Path: /var/logs
+#   KeepDays: 2
+#   Rotation: size
+#   MaxSize: 25
+#   MaxBackups: 30
 
 Gateway:
   Name: greet.api
-  Host: localhost
-  Port: 8888
+  # Host: localhost
+  Port: 9999
   Upstreams:
   - Grpc:
-      Target: 0.0.0.0:8080
+      Target: 0.0.0.0:8888
       # Mappings can also be written in proto options
     Mappings:
       - Method: get

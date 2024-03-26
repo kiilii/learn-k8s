@@ -19,46 +19,34 @@
             {
                 "name": "start",
                 "configurations": [
-                    "getway.service",
-                    "goods.service",
-                    "user.service"
+                    "greet.service",
+                    "order.service",
                 ],
             }
         ],
         "configurations": [
             {
-                "name": "getway.service",
+                "name": "greet.service",
                 "type": "go",
                 "request": "launch",
-                "mode": "exec",
-                "program": "${workspaceRoot}/app/getway/service/bin/server",
+                "mode": "auto",
+                "program": "${workspaceRoot}/app/greet/greet.go",
                 "args": [
-                    "-conf",
-                    "${workspaceRoot}/app/getway/service/configs/config.yaml",
+                    "-f",
+                    "${workspaceRoot}/app/greet/etc/config.yaml",
                 ]
             },
             {
-                "name": "goods.service",
+                "name": "order.service",
                 "type": "go",
                 "request": "launch",
-                "mode": "exec",
-                "program": "${workspaceRoot}/app/goods/service/bin/server",
+                "mode": "auto",
+                "program": "${workspaceRoot}/app/order/order.go",
                 "args": [
-                    "-conf",
-                    "${workspaceRoot}/app/goods/service/configs/config.yaml",
+                    "-f",
+                    "${workspaceRoot}/app/order/etc/config.yaml",
                 ]
             },
-            {
-                "name": "user.service",
-                "type": "go",
-                "request": "launch",
-                "mode": "exec",
-                "program": "${workspaceRoot}/app/user/service/bin/server",
-                "args": [
-                    "-conf",
-                    "${workspaceRoot}/app/user/service/configs/config.yaml"
-                ]
-            }
         ],
     }
 }

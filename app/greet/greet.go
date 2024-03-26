@@ -10,14 +10,13 @@ import (
 	"learn-k8s/app/greet/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/service"
 	"github.com/zeromicro/go-zero/gateway"
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
-
-var gatewayFile = flag.String("g", "etc/gateway.yaml", "the config file")
 
 var configFile = flag.String("f", "etc/greet.yaml", "the config file")
 
@@ -27,7 +26,7 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
-
+	logx.Infof("config: %+v", c)
 	sg := service.NewServiceGroup()
 	defer sg.Stop()
 
@@ -41,12 +40,10 @@ func main() {
 	}))
 
 	// http service
-	var gc gateway.GatewayConf
-	conf.MustLoad(*gatewayFile, &gc)
-	sg.Add(gateway.MustNewServer(gc))
+	sg.Add(gateway.MustNewServer(c.Gateway))
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
-	fmt.Printf("Starting http server at %s...\n", fmt.Sprintf("%s:%d", gc.Host, gc.Port))
+	fmt.Printf("Starting http server at %s...\n", fmt.Sprintf("%s:%d", c.Gateway.Host, c.Gateway.Port))
 
 	sg.Start()
 }

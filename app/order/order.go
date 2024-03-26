@@ -10,6 +10,7 @@ import (
 	"learn-k8s/app/order/order"
 
 	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/service"
 	"github.com/zeromicro/go-zero/gateway"
 	"github.com/zeromicro/go-zero/zrpc"
@@ -25,7 +26,7 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
-
+	logx.Infof("config: %+v", c)
 	sg := service.NewServiceGroup()
 	defer sg.Stop()
 
