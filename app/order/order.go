@@ -26,7 +26,9 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
+
 	logx.Infof("config: %+v", c)
+
 	sg := service.NewServiceGroup()
 	defer sg.Stop()
 

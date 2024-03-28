@@ -1,3 +1,5 @@
 readme
 **/bin
-deploy/script
+deploy/script/debug.sh
+
+deploy/infra

@@ -11,6 +11,11 @@ DevServer:
 #   MaxSize: 20
 #   MaxBackups: 20
 
+LoggerKafkaQueue:
+  Broker: 
+    - "kafka.ops:9092"
+  Topic: "k8s.log"
+
 Gateway:
   Name: order.api
   # Host: localhost

@@ -8,6 +8,7 @@ import (
 	"learn-k8s/app/greet/internal/config"
 	"learn-k8s/app/greet/internal/server"
 	"learn-k8s/app/greet/internal/svc"
+	"learn-k8s/library/xlog"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -26,7 +27,10 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
+
+	logx.SetWriter(logx.NewWriter(xlog.NewLoggerWriter(&c.LoggerKafkaQueue)))
 	logx.Infof("config: %+v", c)
+
 	sg := service.NewServiceGroup()
 	defer sg.Stop()
 
