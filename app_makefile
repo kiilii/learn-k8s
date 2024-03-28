@@ -99,7 +99,8 @@ ent:
 .PHONY: docker
 docker:
 	cd ../.. && \
-	docker build -f deploy/build/Dockerfile --build-arg APP_RELATIVE_PATH=$(APP_RELATIVE_PATH) -t $(DOCKER_IMAGE) .
+	docker build -f deploy/build/Dockerfile --build-arg APP_RELATIVE_PATH=$(APP_RELATIVE_PATH) -t $(DOCKER_IMAGE) . && \
+	docker image push $(DOCKER_IMAGE)
 
 .PHONY: wire
 # generate wire

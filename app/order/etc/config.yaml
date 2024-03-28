@@ -6,10 +6,10 @@ DevServer:
 # Log:
 #   Mode: volume
 #   Path: /var/logs
-#   KeepDays: 2
+#   KeepDays: 1
 #   Rotation: size
-#   MaxSize: 25
-#   MaxBackups: 30
+#   MaxSize: 20
+#   MaxBackups: 20
 
 Gateway:
   Name: order.api

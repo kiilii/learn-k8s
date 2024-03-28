@@ -13,5 +13,9 @@ message Response {
 }
 
 service Greet {
-  rpc Ping(Request) returns(Response);
+  rpc Ping(Request) returns(Response){
+    option (google.api.http) = {
+      get: "/ping"
+    };
+  }
 }

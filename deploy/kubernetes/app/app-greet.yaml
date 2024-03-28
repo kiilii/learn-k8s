@@ -43,11 +43,15 @@ spec:
         volumeMounts:
         - name: timezone
           mountPath: /etc/localtime
+        - name: logs-volume
+          mountPath: /var/logs
       volumes:
         - name: timezone
           hostPath:
             path: /usr/share/zoneinfo/Asia/Shanghai
-
+        - name: logs-volume
+          persistentVolumeClaim:
+            claimName: log-pvc
 ---
 
 apiVersion: v1

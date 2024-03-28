@@ -3,13 +3,13 @@ ListenOn: 0.0.0.0:8888
 Mode: dev
 DevServer: 
   Enable: true
-# Log:
-#   Mode: volume
-#   Path: /var/logs
-#   KeepDays: 2
-#   Rotation: size
-#   MaxSize: 25
-#   MaxBackups: 30
+Log:
+  Mode: volume
+  Path: /var/logs
+  KeepDays: 1
+  Rotation: size
+  MaxSize: 20
+  MaxBackups: 20
 
 Gateway:
   Name: greet.api
