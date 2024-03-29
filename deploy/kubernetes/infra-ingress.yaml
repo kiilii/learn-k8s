@@ -1,0 +1,34 @@
+# ops 相关
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-ops
+  namespace: ops
+  annotations:
+    # 路由重写:
+    # https://support.huaweicloud.com/intl/zh-cn/usermanual-cce/cce_10_0696.html
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  # rules:
+  # - host: ops.kilii.cc
+  #   http:
+  #     paths:
+  #     - path: "/demo(/|$)(.*)"
+  #       pathType: ImplementationSpecific
+  #       backend:
+  #         service:
+  #           name: demo
+  #           port: 
+  #             number: 80
+
+  # - host: grafana.kilii.cc
+  #   http:
+  #     paths:
+  #     - path: '/'
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: prometheus-grafana
+  #           port:
+  #             name: http-web

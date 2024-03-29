@@ -51,7 +51,7 @@ spec:
             path: /usr/share/zoneinfo/Asia/Shanghai
         - name: logs-volume
           persistentVolumeClaim:
-            claimName: log-pvc
+            claimName: log-once-pvc
 ---
 
 apiVersion: v1
