@@ -26,3 +26,8 @@ func (s *GreetServer) Ping(ctx context.Context, in *greet.Request) (*greet.Respo
 	l := logic.NewPingLogic(ctx, s.svcCtx)
 	return l.Ping(in)
 }
+
+func (s *GreetServer) Log(ctx context.Context, in *greet.LogReq) (*greet.LogRsp, error) {
+	l := logic.NewLogLogic(ctx, s.svcCtx)
+	return l.Log(in)
+}

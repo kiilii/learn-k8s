@@ -2,20 +2,32 @@ syntax = "proto3";
 
 package greet;
 
+import "google/api/annotations.proto";
+
 option go_package = "./greet";
 
 message Request {
   string ping = 1;
 }
-
 message Response {
   string pong = 1;
 }
 
+message LogReq {
+  string msg = 1;
+}
+message LogRsp {}
+
 service Greet {
   rpc Ping(Request) returns(Response){
     option (google.api.http) = {
-      get: "/ping"
+      get: "/v1/ping"
     };
   }
+
+  rpc Log (LogReq) returns (LogRsp){
+    option (google.api.http) = {
+      get: "/v1/log"
+    };
+  };
 }

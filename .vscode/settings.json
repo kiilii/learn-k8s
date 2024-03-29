@@ -33,7 +33,7 @@
                 "program": "${workspaceRoot}/app/greet/greet.go",
                 "args": [
                     "-f",
-                    "${workspaceRoot}/app/greet/etc/config.yaml",
+                    "${workspaceRoot}/app/greet/etc/greet.yaml",
                 ]
             },
             {
@@ -44,7 +44,7 @@
                 "program": "${workspaceRoot}/app/order/order.go",
                 "args": [
                     "-f",
-                    "${workspaceRoot}/app/order/etc/config.yaml",
+                    "${workspaceRoot}/app/order/etc/order.yaml",
                 ]
             },
         ],

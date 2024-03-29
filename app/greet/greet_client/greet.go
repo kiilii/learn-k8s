@@ -13,11 +13,14 @@ import (
 )
 
 type (
+	LogReq   = greet.LogReq
+	LogRsp   = greet.LogRsp
 	Request  = greet.Request
 	Response = greet.Response
 
 	Greet interface {
 		Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+		Log(ctx context.Context, in *LogReq, opts ...grpc.CallOption) (*LogRsp, error)
 	}
 
 	defaultGreet struct {
@@ -34,4 +37,9 @@ func NewGreet(cli zrpc.Client) Greet {
 func (m *defaultGreet) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
 	client := greet.NewGreetClient(m.cli.Conn())
 	return client.Ping(ctx, in, opts...)
+}
+
+func (m *defaultGreet) Log(ctx context.Context, in *LogReq, opts ...grpc.CallOption) (*LogRsp, error) {
+	client := greet.NewGreetClient(m.cli.Conn())
+	return client.Log(ctx, in, opts...)
 }

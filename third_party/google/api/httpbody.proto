@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -48,9 +48,10 @@ option objc_class_prefix = "GAPI";
 //     }
 //
 //     service ResourceService {
-//       rpc GetResource(GetResourceRequest) returns (google.api.HttpBody);
-//       rpc UpdateResource(google.api.HttpBody) returns
-//       (google.protobuf.Empty);
+//       rpc GetResource(GetResourceRequest)
+//         returns (google.api.HttpBody);
+//       rpc UpdateResource(google.api.HttpBody)
+//         returns (google.protobuf.Empty);
 //     }
 //
 // Example with streaming methods:

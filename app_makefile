@@ -2,7 +2,7 @@ GOPATH:=$(shell go env GOPATH)
 VERSION=$(shell git describe --tags --always)
 APP_RELATIVE_PATH=$(shell a=`basename $$PWD` && cd .. && b=`basename $$PWD` && echo $$b/$$a)
 INTERNAL_PROTO_FILES=$(shell find internal -name *.proto)
-API_PROTO_FILES=$(shell cd ../../api/$(APP_RELATIVE_PATH) && find . -name *.proto)
+API_PROTO_FILES=$(shell cd ../../$(APP_RELATIVE_PATH) && find . -name *.proto)
 KRATOS_VERSION=$(shell go mod graph |grep zeromicro/go-zero |head -n 1 |awk -F '@' '{print $$2}')
 KRATOS=$(GOPATH)/pkg/mod/github.com/go-kratos/kratos/v2@$(KRATOS_VERSION)
 APP_NAME=$(shell echo $(APP_RELATIVE_PATH) | sed -En "s/\//-/p")
@@ -29,19 +29,32 @@ init:
 	go get -u github.com/google/wire/cmd/wire
 	go get -u github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2
 
+# .PHONY: grpc
+# # generate grpc code
+# grpc:
+# 	cd ../../$(APP_RELATIVE_PATH) && protoc --proto_path=. \
+#            --proto_path=../../third_party \
+#            --go_out=paths=source_relative:. \
+#            --go-grpc_out=paths=source_relative:. \
+#            $(API_PROTO_FILES)
+
+.PHONY: gateway
+# generate grpc-gateway file
+gateway:
+	cd ../../$(APP_RELATIVE_PATH) && protoc --descriptor_set_out=../../output/gateway/$(API_PROTO_FILES).pb $(API_PROTO_FILES) \
+		--proto_path=. --proto_path=../../third_party/ 
+
 .PHONY: grpc
 # generate grpc code
-grpc:
-	 cd ../../../api/$(APP_RELATIVE_PATH) && protoc --proto_path=. \
-           --proto_path=../../../third_party \
-           --go_out=paths=source_relative:. \
-           --go-grpc_out=paths=source_relative:. \
-           $(API_PROTO_FILES)
-
+grpc: gateway
+	cd ../../$(APP_RELATIVE_PATH) && goctl rpc protoc $(API_PROTO_FILES) \
+	--go_out=. --go-grpc_out=. --zrpc_out=. --style=go_zero \
+	--proto_path=./ --proto_path=../../third_party
+	
 .PHONY: http
 # generate http code
 http:
-	cd ../../../api/$(APP_RELATIVE_PATH) && protoc --proto_path=. \
+	cd ../../$(APP_RELATIVE_PATH) && protoc --proto_path=. \
            --proto_path=../../../third_party \
            --go_out=paths=source_relative:. \
            --go-http_out=paths=source_relative:. \

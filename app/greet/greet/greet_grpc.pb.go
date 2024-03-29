@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	Greet_Ping_FullMethodName = "/greet.Greet/Ping"
+	Greet_Log_FullMethodName  = "/greet.Greet/Log"
 )
 
 // GreetClient is the client API for Greet service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GreetClient interface {
 	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	Log(ctx context.Context, in *LogReq, opts ...grpc.CallOption) (*LogRsp, error)
 }
 
 type greetClient struct {
@@ -46,11 +48,21 @@ func (c *greetClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOp
 	return out, nil
 }
 
+func (c *greetClient) Log(ctx context.Context, in *LogReq, opts ...grpc.CallOption) (*LogRsp, error) {
+	out := new(LogRsp)
+	err := c.cc.Invoke(ctx, Greet_Log_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GreetServer is the server API for Greet service.
 // All implementations must embed UnimplementedGreetServer
 // for forward compatibility
 type GreetServer interface {
 	Ping(context.Context, *Request) (*Response, error)
+	Log(context.Context, *LogReq) (*LogRsp, error)
 	mustEmbedUnimplementedGreetServer()
 }
 
@@ -60,6 +72,9 @@ type UnimplementedGreetServer struct {
 
 func (UnimplementedGreetServer) Ping(context.Context, *Request) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+}
+func (UnimplementedGreetServer) Log(context.Context, *LogReq) (*LogRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Log not implemented")
 }
 func (UnimplementedGreetServer) mustEmbedUnimplementedGreetServer() {}
 
@@ -92,6 +107,24 @@ func _Greet_Ping_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Greet_Log_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LogReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GreetServer).Log(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Greet_Log_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GreetServer).Log(ctx, req.(*LogReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Greet_ServiceDesc is the grpc.ServiceDesc for Greet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -102,6 +135,10 @@ var Greet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Ping",
 			Handler:    _Greet_Ping_Handler,
+		},
+		{
+			MethodName: "Log",
+			Handler:    _Greet_Log_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

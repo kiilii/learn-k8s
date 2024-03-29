@@ -24,7 +24,9 @@ Gateway:
   - Grpc:
       Target: 0.0.0.0:8888
       # Mappings can also be written in proto options
-    Mappings:
-      - Method: get
-        Path: /ping
-        RpcPath: order.Order/Ping
+    ProtoSets: 
+    - ./gateway/annotations.pb
+    - ./gateway/http.pb
+    - ./gateway/descriptor.pb
+    - ./gateway/greet.proto.pb
+

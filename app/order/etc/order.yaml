@@ -1,4 +1,4 @@
-Name: greet.rpc
+Name: order.rpc
 ListenOn: 0.0.0.0:8888
 Mode: dev
 DevServer: 
@@ -12,12 +12,12 @@ DevServer:
 #   MaxBackups: 20
 
 LoggerKafkaQueue:
-  Brokers: 
+  Broker: 
     - "kafka.ops:9092"
   Topic: "k8s.log"
 
 Gateway:
-  Name: greet.api
+  Name: order.api
   # Host: localhost
   Port: 9999
   Upstreams:
@@ -25,7 +25,8 @@ Gateway:
       Target: 0.0.0.0:8888
       # Mappings can also be written in proto options
     ProtoSets: 
-    - ./gateway/annotations.pb
-    - ./gateway/http.pb
-    - ./gateway/descriptor.pb
-    - ./gateway/greet.proto.pb
+    - ../../output/gateway/annotations.pb
+    - ../../output/gateway/http.pb
+    - ../../output/gateway/descriptor.pb
+    - ../../output/gateway/greet.proto.pb
+

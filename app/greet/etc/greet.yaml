@@ -23,9 +23,14 @@ Gateway:
   Upstreams:
   - Grpc:
       Target: 0.0.0.0:8888
-      # Mappings can also be written in proto options
     ProtoSets: 
-    - ./gateway/annotations.pb
-    - ./gateway/http.pb
-    - ./gateway/descriptor.pb
-    - ./gateway/greet.proto.pb
+    - ../../output/gateway/annotations.pb
+    - ../../output/gateway/http.pb
+    - ../../output/gateway/descriptor.pb
+    
+    - ../../output/gateway/greet.proto.pb
+      # Mappings can also be written in proto options
+    # Mappings:
+    #   - Method: get
+    #     Path: /ping/{ping}
+    #     RpcPath: greet.Greet/Ping
