@@ -26,7 +26,7 @@ ENV TZ Asia/Shanghai
 
 WORKDIR /app
 COPY --from=builder /app/server /app/server
-COPY --from=builder /src/server /app/server
 COPY --from=builder /src/output/gateway /app/gateway
+COPY --from=builder /src/${APP_RELATIVE_PATH}/etc /app/etc
 
 CMD ["./server", "-f", "etc/config.yaml"]
