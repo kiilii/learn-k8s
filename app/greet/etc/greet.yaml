@@ -15,6 +15,9 @@ LoggerKafkaQueue:
   Brokers: 
     - "kafka.ops:9092"
   Topic: "k8s.log"
+  SASL:
+    Username: user1
+    Password: mskQYNfW9Q
 
 Gateway:
   Name: greet.api

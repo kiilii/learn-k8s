@@ -4,6 +4,7 @@ import (
 	"io"
 	"time"
 
+	"github.com/segmentio/kafka-go/sasl/plain"
 	"github.com/zeromicro/go-queue/kq"
 )
 
@@ -14,6 +15,7 @@ type LoggerWriterConfig struct {
 	Topic         string   `json:",omitempty"`
 	FlushInterval int64    `json:",optional"`
 	ChunkSize     int      `json:",optional"`
+	SASL          plain.Mechanism
 }
 
 type KafkaLoggerWriter struct {

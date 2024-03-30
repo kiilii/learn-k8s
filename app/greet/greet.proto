@@ -16,7 +16,9 @@ message Response {
 message LogReq {
   string msg = 1;
 }
-message LogRsp {}
+message LogRsp {
+  string msg = 1;
+}
 
 service Greet {
   rpc Ping(Request) returns(Response){

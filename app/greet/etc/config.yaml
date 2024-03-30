@@ -13,8 +13,13 @@ DevServer:
 
 LoggerKafkaQueue:
   Brokers: 
-    - "kafka.ops:9092"
+  - kafka-controller-0.kafka-controller-headless.ops.svc.cluster.local:9092
+  - kafka-controller-1.kafka-controller-headless.ops.svc.cluster.local:9092
+  - kafka-controller-2.kafka-controller-headless.ops.svc.cluster.local:9092
   Topic: "k8s.log"
+  SASL:
+    Username: user1
+    Password: mskQYNfW9Q
 
 Gateway:
   Name: greet.api
