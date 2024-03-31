@@ -1,0 +1,6 @@
+Name: ws-api
+Host: 0.0.0.0
+Port: 8888
+Mode: dev
+DevServer: 
+  Enable: true

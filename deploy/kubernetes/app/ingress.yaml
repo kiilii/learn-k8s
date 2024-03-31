@@ -7,6 +7,9 @@ metadata:
     # 路由重写:
     # https://support.huaweicloud.com/intl/zh-cn/usermanual-cce/cce_10_0696.html
     nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
 spec:
   ingressClassName: nginx
   defaultBackend:
@@ -33,6 +36,17 @@ spec:
               number: 9999
         # path: /order/
         path: '/order(/|$)(.*)'
+        pathType: ImplementationSpecific
+  - host: ws.local.kilii.cc
+    http:
+      paths:
+      - backend:
+          service:
+            name: app-ws-svc
+            port:
+              number: 8888
+        # path: /greet/
+        path: '/'
         pathType: ImplementationSpecific
 status:
   loadBalancer: {}

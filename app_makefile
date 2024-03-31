@@ -59,6 +59,20 @@ http:
            --go_out=paths=source_relative:. \
            --go-http_out=paths=source_relative:. \
            $(API_PROTO_FILES)
+.PHONY: ws
+# generate websocket service
+ws:
+	cd ../../$(APP_RELATIVE_PATH) && goctl api go -api ./ws.api -dir . \
+		-style go_zero --home=../../deploy/template
+
+.PHONY: kube
+# generate kube file
+kube:
+	cd ../../$(APP_RELATIVE_PATH) && goctl kube deploy --name $(APP_NAME)  \
+		--namespace k8s-practice --port 8888 --image kilii/svc-$(APP_NAME):0.1.1 \
+		--imagePullPolicy IfNotPresent --minReplicas 1 --replicas 1 --revisions 3 \
+		--home=../../deploy/template \
+		-o ../../deploy/kubernetes/app/app-ws.yaml
 
 .PHONY: errors
 # generate errors code

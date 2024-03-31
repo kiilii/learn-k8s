@@ -1,0 +1,53 @@
+package svc
+
+import (
+	"net"
+
+	"github.com/huandu/skiplist"
+	"github.com/zeromicro/go-zero/core/service"
+)
+
+var _ (service.Service) = (*Hub)(nil)
+
+type Hub struct {
+	// Registered clients.
+	clients skiplist.Scorable
+
+	// Inbound messages from the clients.
+	broadcast chan []byte
+
+	// Register requests from the clients.
+	register chan *Client
+
+	// Unregister requests from clients.
+	unregister chan *Client
+}
+
+// Start implements service.Service.
+func (h *Hub) Start() {
+
+	for {
+
+	}
+
+	panic("unimplemented")
+}
+
+// Stop implements service.Service.
+func (h *Hub) Stop() {
+	panic("unimplemented")
+}
+
+func NewHub() *Hub {
+
+	return &Hub{
+		broadcast:  make(chan []byte),
+		register:   make(chan *Client),
+		unregister: make(chan *Client),
+		// clients:    make(map[*Client]bool),
+	}
+}
+
+type Client struct {
+	conn *net.Conn
+}

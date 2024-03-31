@@ -1,0 +1,18 @@
+syntax = "v1"
+
+type Request {
+	Name string `path:"name,options=you|me"`
+}
+
+type Response {
+	Message string `json:"message"`
+}
+
+service ws-api {
+	@doc (
+		summary: "websocket upgrade"
+	)
+	@handler WsUpgrade
+	get /
+}
+
