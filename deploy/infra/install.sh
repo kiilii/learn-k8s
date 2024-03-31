@@ -11,15 +11,16 @@ helm install prometheus-stack prometheus-community/kube-prometheus-stack \
     --set alertmanager.enabled=true \
     --set alertmanager.ingress.enabled=true \
     --set alertmanager.ingress.ingressClassName=nginx \
-    --set alertmanager.ingress.host=['alertmanager.ops.kilii.cc'] \
+    --set alertmanager.ingress.hosts={alertmanager.ops.kilii.cc} \
     --set grafana.enabled=true \
     --set grafana.ingress.enabled=true \
     --set grafana.ingress.ingressClassName=nginx \
-    --set grafana.ingress.host=['grafana.ops.kilii.cc'] \
+    --set grafana.ingress.hosts={grafana.ops.kilii.cc} \
+    --set grafana.adminPassword=helloworld \
     --set prometheus.enabled=true \
     --set prometheus.ingress.enabled=true \
     --set prometheus.ingress.ingressClassName=nginx \
-    --set prometheus.ingress.host=['prome.ops.kilii.cc'] \
+    --set prometheus.ingress.hosts={prome.ops.kilii.cc} \
     --wait
 
 # add helm repo
