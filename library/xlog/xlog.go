@@ -10,7 +10,7 @@ import (
 
 var _ (io.Writer) = (*KafkaLoggerWriter)(nil)
 
-type LoggerWriterConfig struct {
+type LoggerKafkaWriterConfig struct {
 	Brokers       []string `json:",omitempty"`
 	Topic         string   `json:",omitempty"`
 	FlushInterval int64    `json:",optional"`
@@ -19,7 +19,7 @@ type LoggerWriterConfig struct {
 }
 
 type KafkaLoggerWriter struct {
-	c *LoggerWriterConfig
+	c *LoggerKafkaWriterConfig
 
 	pusher *kq.Pusher
 }
@@ -33,7 +33,7 @@ func (k *KafkaLoggerWriter) Write(p []byte) (n int, err error) {
 	return len(p), err
 }
 
-func NewLoggerWriter(c *LoggerWriterConfig) *KafkaLoggerWriter {
+func NewLoggerWriter(c *LoggerKafkaWriterConfig) *KafkaLoggerWriter {
 	var opts []kq.PushOption
 
 	if len(c.Brokers) == 0 {

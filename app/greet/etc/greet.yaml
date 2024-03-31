@@ -11,10 +11,17 @@ DevServer:
 #   MaxSize: 20
 #   MaxBackups: 20
 
+# LoggerKafkaQueue:
+#   Brokers: 
+#     - "kafka.ops:9092"
+#   Topic: "k8s.log"
+#   SASL:
+#     Username: user1
+#     Password: mskQYNfW9Q
 LoggerKafkaQueue:
   Brokers: 
-    - "kafka.ops:9092"
-  Topic: "k8s.log"
+    - "localhost:9092"
+  Topic: "k8s.test"
   SASL:
     Username: user1
     Password: mskQYNfW9Q

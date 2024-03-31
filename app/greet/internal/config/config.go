@@ -10,7 +10,7 @@ import (
 type Config struct {
 	zrpc.RpcServerConf
 
-	LoggerKafkaQueue xlog.LoggerWriterConfig
+	LoggerKafkaQueue xlog.LoggerKafkaWriterConfig
 
 	Gateway gateway.GatewayConf
 }

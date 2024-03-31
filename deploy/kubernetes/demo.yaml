@@ -14,32 +14,39 @@ spec:
       containers:
       - name: config-demo
         image: registry.k8s.io/busybox
+        imagePullPolicy: Never
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
-        command: ["ls", "-l", "/config"]
+        command: ["sleep", "10", "&&", "ls", "-l", "/var/", "&&", "sleep", "30"]
         volumeMounts:
-          - name: config-volume
-            readOnly: true
-            mountPath: "/config"
-          - name: secret-volume
-            readOnly: true
-            mountPath: "/root/"
+          # - name: config-volume
+          #   readOnly: true
+          #   mountPath: "/config"
+          # - name: secret-volume
+          #   readOnly: true
+          #   mountPath: "/root/"
+          - name: logs-volume
+            mountPath: /var/logs
       volumes:
       # 你可以在 Pod 级别设置卷，然后将其挂载到 Pod 内的容器中
-      - name: config-volume
-        configMap:
-          # 提供你想要挂载的 ConfigMap 的名字
-          name: config-demo-cm
-          # 来自 ConfigMap 的一组键，将被创建为文件
-          items:
-          - key: "game.properties"
-            path: "game.properties" # 文件名称
-          - key: "user-interface.properties"
-            path: "user-interface.properties"
-      # secret
-      - name: secret-volume
-        secret:
-          secretName: aws-secret
+      # - name: config-volume
+      #   configMap:
+      #     # 提供你想要挂载的 ConfigMap 的名字
+      #     name: config-demo-cm
+      #     # 来自 ConfigMap 的一组键，将被创建为文件
+      #     items:
+      #     - key: "game.properties"
+      #       path: "game.properties" # 文件名称
+      #     - key: "user-interface.properties"
+      #       path: "user-interface.properties"
+      # # secret
+      # - name: secret-volume
+      #   secret:
+      #     secretName: aws-secret
+        
+      - name: logs-volume
+        persistentVolumeClaim:
+            claimName: log-pvc
         

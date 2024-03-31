@@ -8,6 +8,7 @@ import (
 	"learn-k8s/app/greet/internal/config"
 	"learn-k8s/app/greet/internal/server"
 	"learn-k8s/app/greet/internal/svc"
+	"learn-k8s/library/xlog"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -29,6 +30,7 @@ func main() {
 
 	logx.Infof("config: %+v", c)
 
+	logx.SetWriter(logx.NewWriter(xlog.NewLoggerWriter(&c.LoggerKafkaQueue)))
 	sg := service.NewServiceGroup()
 	defer sg.Stop()
 
@@ -42,7 +44,8 @@ func main() {
 	}))
 
 	// http service
-	sg.Add(gateway.MustNewServer(c.Gateway))
+	sg.Add(gateway.MustNewServer(c.Gateway, func(svr *gateway.Server) {
+	}))
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
 	fmt.Printf("Starting http server at %s...\n", fmt.Sprintf("%s:%d", c.Gateway.Host, c.Gateway.Port))

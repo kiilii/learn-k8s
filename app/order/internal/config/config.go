@@ -11,7 +11,7 @@ type Config struct {
 	zrpc.RpcServerConf
 
 	// 日志写入
-	LoggerKafkaQueue xlog.LoggerWriterConfig
+	LoggerKafkaQueue xlog.LoggerKafkaWriterConfig
 
 	Gateway gateway.GatewayConf
 }

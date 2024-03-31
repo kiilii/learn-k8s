@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: temp-pod
+spec:
+  selector:
+    matchLabels:
+      app: temp-pod
+  template:
+    metadata:
+      labels:
+        app: temp-pod
+    spec:
+      containers:
+      - name: temp-pod
+        image: golang:alpine
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        command: [ "/bin/sh", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+

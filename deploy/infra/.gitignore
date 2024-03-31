@@ -1,0 +1,8 @@
+kibana
+kube-prometheus-stack
+# filebeat
+# elasticsearch
+kafka
+ingress-nginx
+
+helm-install.sh
