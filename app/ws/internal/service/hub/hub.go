@@ -2,8 +2,10 @@ package hub
 
 import (
 	"context"
+	"fmt"
 	"learn-k8s/app/ws/internal/config"
 	"learn-k8s/app/ws/internal/svc"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/service"
@@ -41,13 +43,17 @@ func (s *Service) SendMessage(k, v string) error {
 }
 
 func (s *Service) Start() {
+	s.Infof("hub service start")
 	threading.GoSafe(func() {
-		if s.svcGroup != nil {
-			s.svcGroup.Start()
+		tick := time.NewTicker(time.Second * 3)
+		for {
+			<-tick.C
+			msg := fmt.Sprintf("当前时间：%s", time.Now())
+			s.Infof("msg: %s")
+
+			s.svcCtx.WebsocketHub.Broadcast(msg)
 		}
 	})
-
-	s.Infof("hub service start")
 }
 
 func (s *Service) Stop() {

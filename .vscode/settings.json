@@ -47,6 +47,28 @@
                     "${workspaceRoot}/app/order/etc/order.yaml",
                 ]
             },
+            {
+                "name": "ws.service",
+                "type": "go",
+                "request": "launch",
+                "mode": "auto",
+                "program": "${workspaceRoot}/app/ws/ws.go",
+                "args": [
+                    "-f",
+                    "${workspaceRoot}/app/ws/etc/ws-api.yaml",
+                ]
+            },
+            {
+                "name": "ws.test",
+                "type": "go",
+                "request": "launch",
+                "mode": "auto",
+                "program": "${workspaceRoot}/test/ws/client.go",
+                "args": [
+                    "--addr",
+                    "localhost:8888",
+                ]
+            },
         ],
     }
 }

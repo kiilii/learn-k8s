@@ -4,9 +4,10 @@ APP_RELATIVE_PATH=$(shell a=`basename $$PWD` && cd .. && b=`basename $$PWD` && e
 INTERNAL_PROTO_FILES=$(shell find internal -name *.proto)
 API_PROTO_FILES=$(shell cd ../../$(APP_RELATIVE_PATH) && find . -name *.proto)
 KRATOS_VERSION=$(shell go mod graph |grep zeromicro/go-zero |head -n 1 |awk -F '@' '{print $$2}')
-KRATOS=$(GOPATH)/pkg/mod/github.com/go-kratos/kratos/v2@$(KRATOS_VERSION)
+# KRATOS=$(GOPATH)/pkg/mod/github.com/go-kratos/kratos/v2@$(KRATOS_VERSION)
 APP_NAME=$(shell echo $(APP_RELATIVE_PATH) | sed -En "s/\//-/p")
-DOCKER_IMAGE=$(shell echo $(APP_NAME) |awk -F '@' '{print "kilii/svc-" $$0 ":0.1.1"}')
+# DOCKER_IMAGE=$(shell echo $(APP_NAME) |awk -F '@' '{print "kilii/svc-" $$0 ":" $(VERSION)}')
+DOCKER_IMAGE="kilii/svc-$(APP_NAME):$(VERSION)"
 
 .PHONY: print
 print:
@@ -70,7 +71,7 @@ ws:
 kube:
 	cd ../../$(APP_RELATIVE_PATH) && goctl kube deploy --name $(APP_NAME)  \
 		--namespace k8s-practice --port 8888 --image kilii/svc-$(APP_NAME):0.1.1 \
-		--imagePullPolicy IfNotPresent --minReplicas 1 --replicas 1 --revisions 3 \
+		--imagePullPolicy Always --minReplicas 1 --replicas 1 --revisions 3 \
 		--home=../../deploy/template \
 		-o ../../deploy/kubernetes/app/app-ws.yaml
 

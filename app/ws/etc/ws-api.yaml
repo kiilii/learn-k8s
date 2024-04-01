@@ -4,3 +4,8 @@ Port: 8888
 Mode: dev
 DevServer: 
   Enable: true
+
+WebsocketConfig:
+  HandshakeTimeout: 300
+  ReadBufferSize: 4096
+  WriteBufferSize: 4096

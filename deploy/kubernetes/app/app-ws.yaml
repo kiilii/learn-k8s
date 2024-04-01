@@ -19,7 +19,7 @@ spec:
       containers:
       - name: app-ws
         image: kilii/svc-app-ws:0.1.1
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 8888
         readinessProbe:
