@@ -12,7 +12,7 @@ DevServer:
 #   MaxBackups: 20
 
 LoggerKafkaQueue:
-  Broker: 
+  Brokers: 
     - "kafka.ops:9092"
   Topic: "k8s.log"
 

@@ -10,11 +10,15 @@ DevServer:
 #   Rotation: size
 #   MaxSize: 20
 #   MaxBackups: 20
+PWD: ${HOMEBREW_PREFIX}
 
 LoggerKafkaQueue:
-  Broker: 
+  Brokers: 
     - "kafka.ops:9092"
   Topic: "k8s.log"
+  SASL:
+    Username: user1
+    Password: mskQYNfW9Q
 
 Gateway:
   Name: order.api

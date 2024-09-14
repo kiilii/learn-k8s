@@ -10,6 +10,8 @@ import (
 type Config struct {
 	zrpc.RpcServerConf
 
+	PWD string
+
 	// 日志写入
 	LoggerKafkaQueue xlog.LoggerKafkaWriterConfig
 

@@ -1,7 +1,7 @@
 kibana
 kube-prometheus-stack
-# filebeat
-# elasticsearch
+filebeat
+elasticsearch
 kafka
 ingress-nginx
 
